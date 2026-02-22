@@ -202,6 +202,21 @@ const ShowUserCart = async (req, res) => {
     }
 };
 
+const checkUserCart = async(req,res) =>{
+    console.log("Check Cart");
+    const email = req.user.email;
+    try {
+        const {prdId} = req.body;
+        const checkItem = await cart.findOne({email, prdId});
+        if(!checkItem) return res.status(404).send({msg:0});
+        return res.status(200).res.status(200).send({msg:1})
+    } catch (error) {
+        return res.status(500).send({
+            msg:"Server Error"
+        })
+    }
+}
+
 const RemoveCart = async(req,res)=>{
     console.log("Delete")
     const email = req.user.email;
