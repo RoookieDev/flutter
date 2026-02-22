@@ -204,7 +204,7 @@ const ShowUserCart = async (req, res) => {
 
 const checkUserCart = async(req,res) =>{
     console.log("Check Cart");
-    const email = req.user.email;
+    const email = req.params;
     try {
         const {prdId} = req.body;
         const checkItem = await cart.findOne({email, prdId});
@@ -267,4 +267,4 @@ const RemoveCart = async(req,res)=>{
 }
 
 
-module.exports = {UserPostData,UserLoginData, UserProfile, UserLogout, UserCart,ShowUserCart, RemoveCart};
+module.exports = {UserPostData,UserLoginData, UserProfile, UserLogout, UserCart,ShowUserCart, RemoveCart, checkUserCart};
