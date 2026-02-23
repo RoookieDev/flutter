@@ -208,8 +208,8 @@ const checkUserCart = async(req,res) =>{
     try {
         const {prdId} = req.params;
         const checkItem = await cart.findOne({email, prdId});
-        if(!checkItem) return res.status(404).send({msg:0});
-        return res.status(200).send({msg:1})
+        if(!checkItem) return res.send({msg:0, status_code:404});
+        return res.send({msg:1, status_code:200});
     } catch (error) {
         return res.status(500).send({
             msg:"Server Error"
