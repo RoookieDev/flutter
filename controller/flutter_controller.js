@@ -1,5 +1,6 @@
 const userModel = require('../model/userModel');
-const cart = require('../model/cartModel')
+const cart = require('../model/cartModel');
+const Buy = require('../model/buyModel');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
@@ -267,4 +268,31 @@ const RemoveCart = async(req,res)=>{
 }
 
 
-module.exports = {UserPostData,UserLoginData, UserProfile, UserLogout, UserCart,ShowUserCart, RemoveCart, checkUserCart};
+const BuyProduct = async(req,res)=>{
+    console.log("Buy Product");
+    const email = req.user.email;
+    try {
+        const {prdId, totalAmount} = req.body;
+        const insertBuy = await Buy.create({
+            userId:req.user.userId,
+            products:[
+                {
+                    prdId: prdId,
+                    quantity: 1
+                }
+            ],
+            totalAmount: totalAmount
+        });
+        return res.status(200).send({
+            success:true,
+            data:insertBuy
+        })
+    } catch (error) {
+        return res.status(500).send({
+            msg:"Server Error",
+            error:error.message
+        })
+    }
+}
+
+module.exports = {UserPostData,UserLoginData, UserProfile, UserLogout, UserCart,ShowUserCart, RemoveCart, checkUserCart, BuyProduct};
