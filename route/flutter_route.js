@@ -11,5 +11,5 @@ router.post('/user/UserCart',auth, UserCart);
 router.get('/user/ShowUserCart',auth, ShowUserCart);
 router.post('/user/RemoveCart',auth, RemoveCart);
 router.get('/user/checkCart/:prdId',auth, checkUserCart);
-router.post('/user/buyProduct/',auth, BuyProduct);
+router.post('/user/buyProduct',auth, BuyProduct);
 module.exports = router;
